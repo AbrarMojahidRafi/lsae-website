@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block title %}Profile - LSA.Apparels Experts Pvt Ltd{% endblock %}
+
+{% block content %}
+<div style="display: flex; justify-content: center; align-items: center; height: 75vh;">
+    <section class="profile-info" style="max-width: 800px; padding: 20px; background-color: #f9f9f9; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+        <!-- User Info and Image Section -->
+        <div style="display: flex; align-items: center; gap: 20px; margin-bottom: 30px;">
+            <!-- User Info -->
+            <div style="flex: 1;">
+                <p>Welcome, {{ user.username }}!</p>
+                <p>Email: {{ user.email }}</p>
+            </div>
+
+            <!-- Profile Image -->
+            <div style="flex: 1; text-align: center;">
+                {% if user.profile.profile_photo %}
+                    <img src="{{ user.profile.profile_photo.url }}" alt="{{ user.username }}'s profile picture" style="max-width: 200px; height: auto; border-radius: 10px;">
+                {% else %}
+                    <p>No profile picture available.</p>
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- Buttons Section -->
+        <div style="display: flex; gap: 20px; justify-content: center;">
+            <!-- Edit Profile Button -->
+            <div>
+                <button
+                    onclick="window.location.href='{% url 'edit_profile' %}'"
+                    style="padding: 10px 20px; background-color: #4CAF50; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 16px;">
+                    Edit Profile
+                </button>
+            </div>
+
+            <!-- Change Password Button -->
+            <div>
+                <button
+                    onclick="window.location.href='{% url 'password_change' %}'"
+                    style="padding: 10px 20px; background-color: #008CBA; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 16px;">
+                    Change Password
+                </button>
+            </div>
+        </div>
+    </section>
+</div>
+{% endblock %}

@@ -1,0 +1,401 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}LSA.Apparel Experts Pvt Ltd - Home{% endblock %}
+
+{% block content %}
+<section id="home">
+    <div id="myCarousel" class="carousel slide banner_slide" data-ride="carousel">
+        <ol class="carousel-indicators">
+            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+            <li data-target="#myCarousel" data-slide-to="1"></li>
+            <li data-target="#myCarousel" data-slide-to="2"></li>
+            <li data-target="#myCarousel" data-slide-to="3"></li>
+        </ol>
+        <div class="carousel-inner">
+            <div class="item active" id="s1">
+                <img src="{% static 'home/images/cover.jpeg' %}" alt="LSA.Apparel Experts Pvt Ltd" class="slide_img">
+                <div class="carousel-caption d-flex justify-content-start align-items-center" style="height: 100%;">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-6 col-md-8 col-sm-10 col-12">
+                                <div class="enquiry-form-container p-4 form-div" style="
+                                    background: rgba(0, 0, 0, 0.6);
+                                    color: white;
+                                    border-radius: 8px;">
+                                    <h2 class="text-white mb-4">Enquire Now</h2>
+                                    <form method="post" id="enquiry-form" class="wpcf7-form">
+                                        {% csrf_token %}
+                                        <div class="form-group">
+                                            <label for="name">Name:</label>
+                                            <input type="text" id="name" name="name" class="form-control" required>
+                                            <div class="error text-danger">{{ form.name.errors }}</div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="email">Email:</label>
+                                            <input type="email" id="email" name="email" class="form-control" required>
+                                            <div class="error text-danger">{{ form.email.errors }}</div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="phone">Phone:</label>
+                                            <input type="text" id="phone" name="phone" class="form-control" required>
+                                            <div class="error text-danger">{{ form.phone.errors }}</div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="enquiry_for">Enquiry For:</label>
+                                            <div class="custom-select">
+                                                <select id="enquiry_for" name="enquiry_for" class="form-control">
+                                                    {% for product_line in product_lines %}
+                                                        <option value="{{ product_line.id }}">{{ product_line.name }}</option>
+                                                    {% endfor %}
+                                                </select>
+                                            </div>
+                                            <div class="error text-danger">{{ form.enquiry_for.errors }}</div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="message">Message:</label>
+                                            <textarea id="message" name="message" class="form-control" required></textarea>
+                                            <div class="error text-danger">{{ form.message.errors }}</div>
+                                        </div>
+                                        <button type="submit" class="btn btn-primary btn-block">Submit</button>
+                                    </form>
+                                    <div id="form-feedback" class="mt-3"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    /* Custom CSS for the dropdown icon */
+    .custom-select {
+        position: relative;
+    }
+
+    .custom-select::after {
+        content: "▼"; /* Dropdown icon */
+        font-size: 12px;
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        pointer-events: none; /* Ensure the icon doesn't interfere with clicking */
+        color: #000; /* Icon color */
+    }
+
+    .custom-select select {
+        appearance: none; /* Remove default arrow */
+        -webkit-appearance: none; /* Remove default arrow for Safari */
+        -moz-appearance: none; /* Remove default arrow for Firefox */
+        padding-right: 30px; /* Add space for the custom icon */
+    }
+
+    /* Optional: Add hover effect for better UX */
+    .custom-select select:hover {
+        border-color: #666; /* Change border color on hover */
+    }
+</style>
+
+
+<section>
+    <h2 id="product-lines" style="text-align: center;">Product Lines</h2>
+    <div class="product-container">
+        {% for product_line in product_lines %}
+            <div class="product-card">
+                <div class="product-image-container">
+                    <img src="{{ product_line.cover_photo.url }}" alt="{{ product_line.name }}" aria-labelledby="product-lines" class="product-image">
+                </div>
+                <div class="product-info">
+                    <h3>{{ product_line.name }}</h3>
+                    <p>{{ product_line.description }}</p>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</section>
+
+<style>
+    .product-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        justify-content: center;
+    }
+
+    .product-card {
+        width: 300px; /* Adjust width as needed */
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        background-color: white;
+    }
+
+    .product-image-container {
+        width: 100%;
+        height: 200px; /* Set a fixed height for all images */
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #f4f4f4; /* Optional: Light gray background */
+    }
+
+    .product-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover; /* Ensures all images are the same size without distortion */
+    }
+
+    .product-info {
+        background-color: white;
+        padding: 15px;
+    }
+</style>
+
+
+
+<section class="about-section">
+    <div class="about-container">
+        <h2>About Us</h2>
+        <p>Welcome to LSA.Apparel Experts Pvt Ltd, your go-to source for quality apparel. Our specialty is providing top-notch products and services that meet our clients' needs. With years of experience and a dedicated team, we ensure excellence in every aspect of our work.</p>
+        <p>LORD SHIVA INTERNATIONAL was established in 2007 and has been a forerunner in providing world-class Leather and Non-Leather products. Our range includes Equestrian articles, Fashion Bags and Accessories, and various other utility items.</p>
+        <p>The factory is spread over 10,000 sq. Ft. in an area with a large state-of-the-art infrastructure which includes machinery and equipment that can produce the finest quality products within the stipulated time frame. The company has extremely ambitious plans for expansion that will help us stay ahead of the competition and ensure total customer satisfaction.</p>
+        <p>Currently, we cover Europe, the USA, Canada, the UK, Australia, and New Zealand and are working tirelessly to expand to the rest of the world.</p>
+    </div>
+    <div class="why-us-container">
+        <h2>Why choose us?</h2>
+        <p>“Quality can only be maintained when we can constantly monitor the complete manufacturing process right from sourcing of raw material to the packing of the final product.”</p>
+        <p>This is the ideology behind the setting of Lord Shiva International. We understand that it is difficult, if not impossible, to monitor the quality of any of its manufacturing processes are outsourced and so we spared no efforts to install the latest machinery within our premises that would minimize outsourcing of any process and enable us to remain in total control whatsoever. A careful selection of machines ensures that we not only control the quality but also maintain the very critical cost factor and remain competitive enough to generate repeat business.</p>
+        <p>Another aspect behind the thought process was customer secrecy. With minimal outsourcing, we ensure that the designs, that our customers entrust us with, are safe.</p>
+    </div>
+</section>
+
+<style>
+    .about-section {
+        background-color: #172851; /* Dark blue background */
+        padding: 40px 20px;
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 20px;
+    }
+
+    .about-container, .why-us-container {
+        max-width: 48%;
+        color: white; /* White text for contrast */
+        text-align: center; /* Center align content inside the container */
+    }
+
+    .about-container h2, .why-us-container h2 {
+        margin-bottom: 20px;
+        padding-bottom: 10px; /* Space between text and line */
+        border-bottom: 2px solid white; /* Add a line below the h2 text */
+        display: inline-block; /* Ensure the border only spans the text width */
+    }
+
+    .about-container p, .why-us-container p {
+        font-size: 16px;
+        line-height: 1.6;
+        margin-bottom: 15px;
+        text-align: justify; /* Justify p text */
+    }
+
+    @media (max-width: 768px) {
+        .about-container, .why-us-container {
+            max-width: 100%;
+        }
+    }
+</style>
+
+
+
+<section class="speciality-section">
+    <div class="speciality-container">
+        <h2>Our Speciality</h2>
+
+        <!-- Flex container for the three sections -->
+        <div class="speciality-items-container">
+            <!-- Section 1: Highly Skilled Workforce -->
+            <div class="speciality-item">
+                <div class="icon-title">
+                    <img src="https://i0.wp.com/texascraftbrewersguild.org/wp-content/uploads/2020/09/job.png?resize=360,360&ssl=1" alt="Highly Skilled Workforce Icon" class="icon">
+                    <h3>Highly Skilled Workforce</h3>
+                </div>
+                <p>A product made by skilled hands stands out and speaks for itself. We have some of the finest workforces who are trained to produce the finest quality articles. Most of the products are hand made and hence are widely appreciated by our customers.</p>
+            </div>
+
+            <!-- Section 2: Modern Machines -->
+            <div class="speciality-item">
+                <div class="icon-title">
+                    <img src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcRp3WYQXBY2S4ZByXnlfRKW-LsG6jx5PEG7Jcgc174JE6uMaRza" alt="Modern Machines Icon" class="icon">
+                    <h3>Modern Machines</h3>
+                </div>
+                <p>We have undertaken a massive expansion project and have invested hugely in our plant and machinery. This makes us self-reliant and we do not outsource any of our processes. This ensures not only superior quality but also customer secrecy.</p>
+            </div>
+
+            <!-- Section 3: Dedicated Design & Development -->
+            <div class="speciality-item">
+                <div class="icon-title">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQGq02z1JXobZcTwk1Ah33LpTewyOm0W7vzduMtAxVDTFoy_kVe" alt="Dedicated Design & Development Icon" class="icon">
+                    <h3>Dedicated Design & Development</h3>
+                </div>
+                <p>We have a team of dedicated designers who are on their toes always looking for the latest raw material and have a fair knowledge of the trends in the industry. We have successfully created designs that have stood the test of time and have won the appreciation of our customers.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    .speciality-section {
+        background-color: white; /* White background */
+        padding: 40px 20px;
+        display: flex;
+        justify-content: center;
+    }
+
+    .speciality-container {
+        max-width: 1200px; /* Increased max-width for better spacing */
+        text-align: center;
+        color: #172851; /* Text color as requested */
+    }
+
+    .speciality-container h2 {
+        margin-bottom: 20px;
+    }
+
+    .speciality-container p {
+        font-size: 16px;
+        line-height: 1.6;
+        text-align: justify; /* Justify text */
+        margin: 0 auto; /* Center the paragraph */
+        max-width: 800px; /* Limit width for better readability */
+    }
+
+    .speciality-items-container {
+        display: flex; /* Flexbox to align items in one line */
+        justify-content: space-between; /* Space between items */
+        gap: 20px; /* Gap between items */
+    }
+
+    .speciality-item {
+        flex: 1; /* Each item takes equal space */
+        margin-bottom: 40px; /* Space between sections */
+        padding: 20px; /* Add padding for better spacing */
+        background-color: #f9f9f9; /* Light background for each section */
+        border-radius: 8px; /* Rounded corners */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    }
+
+    .icon-title {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 15px; /* Space between icon/title and text */
+    }
+
+    .icon-title img {
+        width: 40px; /* Adjust icon size */
+        height: 40px;
+        margin-right: 10px; /* Space between icon and text */
+    }
+
+    .icon-title h3 {
+        margin: 0; /* Remove default margin */
+        font-size: 20px; /* Adjust title size */
+    }
+
+    @media (max-width: 768px) {
+        .speciality-items-container {
+            flex-direction: column; /* Stack items vertically on smaller screens */
+        }
+    }
+</style>
+
+
+<section class="certifications-section">
+    <h2>Our Certifications</h2>
+    <div class="certifications-container">
+        {% for certification in certifications %}
+            <div class="certification-card">
+                <h3>{{ certification.name }}</h3>
+                <p><strong>Provider:</strong> {{ certification.provider }}</p>
+                <p><strong>Date:</strong> {{ certification.date }}</p>
+                <img src="{{ certification.image.url }}" alt="{{ certification.name }}" class="certification-image">
+            </div>
+        {% endfor %}
+    </div>
+</section>
+
+<style>
+    .certifications-section {
+        background-color: #172851; /* Background color as requested */
+        padding: 40px 20px;
+        text-align: center;
+        color: white; /* Text color for contrast */
+    }
+
+    .certifications-section h2 {
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+    .certifications-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        justify-content: center;
+    }
+
+    .certification-card {
+        width: 300px; /* Adjust size as needed */
+        background-color: white;
+        border-radius: 8px;
+        padding: 20px;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+        text-align: center;
+        color: black; /* Ensuring readability on white background */
+    }
+
+    .certification-card img {
+        width: 100%;
+        height: 180px; /* Ensuring all images are the same size */
+        object-fit: cover;
+        border-radius: 5px;
+        margin-top: 10px;
+    }
+</style>
+
+
+<script>
+    document.getElementById('enquiry-form').addEventListener('submit', function(event) {
+        event.preventDefault();
+        const formData = new FormData(this);
+        fetch('{% url "home" %}', {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest',
+                'X-CSRFToken': '{{ csrf_token }}'
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                document.getElementById('enquiry-form').reset();
+                document.getElementById('form-feedback').innerHTML = '<p>Thank you for your enquiry. We will get back to you soon!</p>';
+            } else {
+                document.getElementById('form-feedback').innerHTML = '<p>There was an error with your submission. Please check your information and try again.</p>';
+            }
+        })
+        .catch(error => {
+            document.getElementById('form-feedback').innerHTML = '<p>An unexpected error occurred. Please try again later.</p>';
+        });
+    });
+</script>
+
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %}Edit Profile - LSA.Apparels Experts Pvt Ltd{% endblock %}
+
+{% block content %}
+<section class="edit-profile-form">
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ user_form.as_p }}
+        {{ profile_form.as_p }}
+        <button type="submit">Save Changes</button>
+    </form>
+</section>
+{% endblock %}

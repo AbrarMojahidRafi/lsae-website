@@ -1,0 +1,104 @@
+<header id="navigation">
+    <div class="container">
+        <nav class="navbar navbar-expand-lg">
+            <a href="{% url 'home' %}" class="navbar-brand">
+                <img src="logo/LSAElogo.png" alt="LSAE Logo" style="height: 40px; width: auto;">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a href="{% url 'home' %}" class="nav-link">Home</a></li>
+                    <li class="nav-item"><a href="{% url 'about' %}" class="nav-link">About Us</a></li>
+                    <li class="nav-item"><a href="{% url 'gallery' %}" class="nav-link">Gallery</a></li>
+                    <li class="nav-item"><a href="{% url 'blog_list' %}" class="nav-link">Our Blogs</a></li>
+                    <li class="nav-item"><a href="{% url 'contact' %}" class="nav-link">Contact Us</a></li>
+                    {% if user.is_authenticated %}
+                        <li class="nav-item"><a href="{% url 'logout' %}" class="nav-link">Logout</a></li>
+                        <li class="nav-item"><a href="{% url 'profile' %}" class="nav-link">Profile</a></li>
+                    {% else %}
+                        <li class="nav-item"><a href="{% url 'login' %}" class="nav-link">Login</a></li>
+                        <li class="nav-item"><a href="{% url 'signup' %}" class="nav-link">Sign Up</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </nav>
+    </div>
+</header>
+
+<style>
+    /* Navbar Styling */
+    #navigation {
+        background-color: #172851; /* Background color */
+        position: fixed; /* Stays at the top */
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 1000;
+        padding: 10px 0;
+    }
+
+    .navbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .navbar-brand {
+        margin-left: 20px;
+    }
+
+    .navbar-brand img {
+        height: 40px; /* Adjust height as needed */
+        width: auto; /* Maintain aspect ratio */
+    }
+
+    .navbar-nav {
+        list-style: none;
+        display: flex;
+        gap: 15px;
+        margin-right: 20px;
+    }
+
+    .nav-item {
+        list-style: none;
+    }
+
+    .nav-link {
+        color: #FFFFFF;
+        text-decoration: none; /* Ensure no underline by default */
+        font-weight: bold;
+        padding: 8px 15px;
+        transition: 0.3s;
+    }
+
+    .nav-link:hover {
+        background-color: rgba(255, 255, 255, 0.2);
+        border-radius: 5px;
+        color: #FFFFFF; /* Ensure text color is white on hover */
+        text-decoration: none; /* Ensure no underline on hover */
+    }
+
+    /* Responsive Navbar */
+    .navbar-toggler {
+        border: none;
+        background: none;
+    }
+
+    .navbar-toggler-icon {
+        background-color: #FFFFFF;
+    }
+
+    @media (max-width: 991px) {
+        .navbar-nav {
+            flex-direction: column;
+            text-align: center;
+            width: 100%;
+        }
+
+        .nav-item {
+            margin: 5px 0;
+        }
+    }
+</style>

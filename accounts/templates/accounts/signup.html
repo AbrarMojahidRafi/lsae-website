@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+
+{% block title %}Sign Up - LSA.Apparels Experts Pvt Ltd{% endblock %}
+
+{% block content %}
+<div class="card container-fluid d-flex justify-content-center align-items-center" style="min-height: calc(100vh - 120px); background-color: #EEEFF2;">
+    <div class=" p-4" style="width: 100%; max-width: 400px; margin-top: 20px; margin-bottom: 20px;">
+        <h2 class="text-center mb-4">Sign Up</h2>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="mb-3">
+                {{ user_form.username.label_tag }}
+                {{ user_form.username }}
+            </div>
+            <div class="mb-3">
+                {{ user_form.email.label_tag }}
+                {{ user_form.email }}
+            </div>
+            <div class="mb-3">
+                {{ user_form.first_name.label_tag }}
+                {{ user_form.first_name }}
+            </div>
+            <div class="mb-3">
+                {{ user_form.last_name.label_tag }}
+                {{ user_form.last_name }}
+            </div>
+            <div class="mb-3">
+                {{ user_form.password1.label_tag }}
+                {{ user_form.password1 }}
+            </div>
+            <div class="mb-3">
+                {{ user_form.password2.label_tag }}
+                {{ user_form.password2 }}
+            </div>
+            <div class="mb-3">
+                {{ profile_form.phone.label_tag }}
+                {{ profile_form.phone }}
+            </div>
+            <div class="mb-3">
+                {{ profile_form.country.label_tag }}
+                {{ profile_form.country }}
+            </div>
+            <div class="mb-3">
+                {{ profile_form.profile_photo.label_tag }}
+                {{ profile_form.profile_photo }}
+            </div>
+            <button type="submit" class="btn btn-primary w-100">Sign Up</button>
+        </form>
+        <p class="text-center mt-3">Already have an account? <a href="{% url 'login' %}">Login here</a></p>
+    </div>
+</div>
+
+<style>
+
+    .card {
+        width: 100%;
+        max-width: 400px;
+        margin: 20px auto; /* উপরে এবং নিচে 20px গ্যাপ */
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+</style>
+
+{% endblock %}

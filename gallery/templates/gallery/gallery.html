@@ -1,0 +1,78 @@
+<!-- gallery/templates/gallery.html -->
+{% extends 'base.html' %}
+
+{% block title %}Product Gallery - LSA.Apparels Experts Pvt Ltd{% endblock %}
+
+{% block content %}
+<section class="product-gallery">
+    <h2 class="gallery-title">Product Gallery</h2>
+    <div id="product-lines">
+        {% for product_line in product_lines %}
+            <div class="product-line-card">
+                <img src="{{ product_line.cover_photo.url }}" alt="{{ product_line.name }}" onclick="loadProducts('{{ product_line.id }}')">
+                <div class="product-line-name">{{ product_line.name }}</div>
+            </div>
+        {% endfor %}
+    </div>
+    <div id="products"></div>
+</section>
+
+<style>
+    /* Center the Product Gallery title and apply Meteor Shower underline */
+    .gallery-title {
+        text-align: center;
+        font-size: 2.5rem;
+        margin-bottom: 2rem;
+        position: relative;
+    }
+
+    .gallery-title::after {
+        content: '';
+        display: block;
+        width: 100px;
+        height: 4px;
+        background: linear-gradient(90deg, #FF416C, #FF4B2B);
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        bottom: -10px;
+    }
+
+    /* Style the product line cards */
+    #product-lines {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 20px;
+        padding: 20px;
+    }
+
+    .product-line-card {
+        background-color: #A7B3CF;
+        border-radius: 10px;
+        overflow: hidden;
+        width: 200px;
+        text-align: center;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        transition: transform 0.3s ease;
+    }
+
+    .product-line-card:hover {
+        transform: scale(1.05);
+    }
+
+    .product-line-card img {
+        width: 100%;
+        height: 150px;
+        object-fit: cover;
+    }
+
+    .product-line-name {
+        background-color: #EEEFF2;
+        color: #ED1C24;
+        padding: 10px;
+        font-size: 1.2rem;
+        font-weight: bold;
+    }
+</style>
+{% endblock %}

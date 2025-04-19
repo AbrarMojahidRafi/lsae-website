@@ -1,0 +1,213 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}About Us - LSA.Apparels Experts Pvt Ltd{% endblock %}
+
+{% block content %}
+<section class="banner" style="background-image: url('{% static 'images/aboutCover.jpg' %}');">
+   <h2>Welcome to LSA.Apparels Experts Pvt Ltd</h2>
+</section>
+
+<div class="content-container" style="background-color: #EEEFF2; display: flex;">
+    <!-- Left Side List -->
+    <div class="left-side-list" style="width: 20%; padding: 20px;">
+        <ul style="list-style-type: none; padding-left: 0;">
+            <li><a href="#infrastructure" class="nav-items">Infrastructure</a></li>
+            <li><a href="#special-machineries" class="nav-items">Special Machineries</a></li>
+            <li><a href="#speciality" class="nav-items">Speciality</a></li>
+            <li><a href="#strong-points" class="nav-items">Strong Points</a></li>
+            <li><a href="#certifications" class="nav-items">Certifications</a></li>
+            <li><a href="#contact" class="nav-items">Contact Us</a></li>
+        </ul>
+    </div>
+
+    <!-- Right Side Details -->
+    <div class="right-side-details" style="width: 80%; padding: 20px;">
+        <section id="infrastructure" class="infrastructure">
+            <h2>Infrastructure</h2>
+            <p>Our state-of-the-art infrastructure ensures the highest quality products and services. We constantly update our facilities to stay ahead of industry standards.</p>
+        </section>
+
+        <!-- Special Machineries Section -->
+        <section id="special-machineries" class="special-machineries">
+            <h2>Special Machineries</h2>
+            <div class="machineries-grid">
+                {% for machinery in special_machineries %}
+                    <div class="machinery-item">
+                        <h3>{{ machinery.name }}</h3>
+                        <p>{{ machinery.description }}</p>
+                        <img src="{{ machinery.image.url }}" alt="{{ machinery.name }}" class="machinery-image">
+                    </div>
+                {% endfor %}
+            </div>
+        </section>
+
+        <section id="speciality" class="speciality">
+            <h2>Speciality</h2>
+            <p><strong>We specialize</strong> in providing high-quality, customized apparel solutions to meet the unique needs of our clients. Our expertise and attention to detail set us apart from the competition.</p>
+        </section>
+
+        <section id="strong-points" class="strong-points">
+            <h2>Strong Points</h2>
+            <p><strong>Our strengths</strong> include a dedicated team, innovative processes, and a commitment to excellence. We pride ourselves on our ability to deliver exceptional results consistently.</p>
+        </section>
+
+        <!-- Certifications Section -->
+        <section id="certifications" class="certifications">
+            <h2>Certifications</h2>
+            <p>Internationally Renowned Certifications</p>
+            <div class="certifications-grid">
+                {% for certification in certifications %}
+                    <div class="certification-item">
+                        <h3>{{ certification.name }}</h3>
+                        <p><strong>Provider:</strong> {{ certification.provider }}</p>
+                        <p><strong>Date:</strong> {{ certification.date }}</p>
+                        <img src="{{ certification.image.url }}" alt="{{ certification.name }}" class="certification-image">
+                    </div>
+                {% endfor %}
+            </div>
+        </section>
+
+        <!-- Contact Us Section -->
+        <section id="contact" class="contact">
+            <h2>Contact Us</h2>
+
+            <!-- First Row: Image and Office Address -->
+            <div class="contact-row">
+                <div class="contact-image">
+                    <img src="https://lordshivaintl.com/wp-content/uploads/2022/03/location-lord-shiva-office3-540x392.png" alt="Office Location">
+                </div>
+                <div class="contact-box">
+                    <h3>Office Address</h3>
+                    <p>F 19 & 20, Bajrangbali Industrial Estate,<br>
+                    Panki Site 4,<br>
+                    Kanpur 208022 (INDIA)</p>
+                </div>
+            </div>
+
+            <!-- Second Row: Image and Contact Persons -->
+            <div class="contact-row">
+                <div class="contact-image">
+                    <img src="https://lordshivaintl.com/wp-content/uploads/2022/06/contact-us-540x301.jpg" alt="Contact Us">
+                </div>
+                <div class="contact-box">
+                    <h3>Contacts Persons</h3>
+                    <p><strong>Pulak Chowdhury</strong><br>
+                    <a href="mailto:pulak@lordshivaintl.com">pulak@lordshivaintl.com</a><br>
+                    +91 7080251888</p>
+                    <p><strong>Sushil Takru – Managing Partner</strong><br>
+                    <a href="mailto:sushil@lordshivaintl.com">sushil@lordshivaintl.com</a><br>
+                    +91 9936422888</p>
+                </div>
+            </div>
+
+            <!-- Google Map Section -->
+            <div class="google-map-section">
+                <h3>Our Location on Google Map</h3>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d7144.041008338498!2d80.246568!3d26.455068!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x399c482447b40bed%3A0xd8df2cefc343d977!2sLord%20Shiva%20International!5e0!3m2!1sen!2sin!4v1741333064337!5m2!1sen!2sin" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </section>
+    </div>
+</div>
+
+<style>
+    /* Common Card Design */
+    .machinery-item, .certification-item {
+        width: 300px; /* Adjust size as needed */
+        background-color: white;
+        border-radius: 8px;
+        padding: 20px;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+        text-align: center;
+        color: black; /* Ensuring readability on white background */
+        margin-bottom: 20px; /* Space between cards */
+    }
+
+    .machinery-item img, .certification-item img {
+        width: 100%;
+        height: 180px; /* Ensuring all images are the same size */
+        object-fit: cover;
+        border-radius: 5px;
+        margin-top: 10px;
+    }
+
+    .machineries-grid, .certifications-grid {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        justify-content: center;
+    }
+
+    /* Left Side List Styling */
+    .nav-items {
+        text-decoration: none;
+        color: #000;
+        font-size: 16px;
+        font-weight: bold;
+        padding: 10px 0;
+        display: block;
+        border-bottom: 2px solid #172851; /* Underline color */
+        transition: background-color 0.3s ease; /* Smooth transition for hover */
+    }
+
+    .left-side-list ul {
+        padding-left: 0;
+    }
+
+    .left-side-list ul li {
+        margin-bottom: 10px;
+    }
+
+    .contact-row {
+        display: flex;
+        gap: 20px;
+        margin-bottom: 40px;
+    }
+
+    .contact-image, .contact-box {
+        flex: 1;
+    }
+
+    .contact-image img {
+        width: 100%;
+        height: auto;
+        border-radius: 8px;
+    }
+
+    .contact-box {
+        background-color: white;
+        border-radius: 8px;
+        padding: 20px;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .contact-box h3 {
+        margin-top: 0;
+    }
+
+    .contact-box p {
+        margin: 10px 0;
+    }
+
+    .contact-box a {
+        color: #172851;
+        text-decoration: none;
+    }
+
+    .contact-box a:hover {
+        text-decoration: underline;
+    }
+
+    .google-map-section {
+        margin-top: 40px;
+        text-align: left;
+    }
+
+    .google-map-section h3 {
+        margin-bottom: 30px;
+        font-size: 24px;
+        color: #172851;
+    }
+</style>
+
+{% endblock %}

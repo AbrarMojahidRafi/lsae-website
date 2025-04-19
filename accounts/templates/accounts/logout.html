@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block title %}Logout{% endblock %}
+
+{% block content %}
+<div style="display: flex; justify-content: center; align-items: center; height: 75vh; flex-direction: column;">
+    <div style="text-align: center; ">
+        <h2>Logout</h2>
+        <p>Are you sure you want to log out from My App?</p>
+
+        <div style="margin-top: 20px;">
+            <form method="post" action="{% url 'logout' %}" style="display: inline;">
+                {% csrf_token %}
+                <button type="submit" style="background-color: red; color: white; padding: 10px 20px; border: none; cursor: pointer;">Yes</button>
+            </form>
+            <a href="{% url 'home' %}" style="background-color: #EEEFF2; color: black; padding: 10px 20px; text-decoration: none; display: inline-block; margin-left: 10px;">No</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

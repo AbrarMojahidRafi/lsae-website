@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ blog.title }} - LSA.Apparels Experts Pvt Ltd{% endblock %}
+
+{% block content %}
+<section class="blog-detail">
+    <h1>{{ blog.title }}</h1>
+    <p>By {{ blog.author }} on {{ blog.published_date }}</p>
+    <div class="blog-content">
+        <p>{{ blog.content }}</p>
+        <div class="blog-images">
+            {% for image in blog.images.all %}
+                <img src="{{ image.image.url }}" alt="{{ blog.title }}">
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}

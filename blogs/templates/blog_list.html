@@ -1,0 +1,23 @@
+<!-- blogs/templates/blog_list.html -->
+{% extends 'base.html' %}
+
+{% block title %}Our Blogs - LSA.Apparels Experts Pvt Ltd{% endblock %}
+
+{% block content %}
+<section class="blog-list">
+   <h1>Our Blogs</h1>
+   {% if user.is_authenticated %}
+       <a href="{% url 'blog_create' %}">Post a Blog</a>
+   {% endif %}
+   {% for blog in blogs %}
+       <div class="blog-entry">
+           <h2><a href="{% url 'blog_detail' blog.id %}">{{ blog.title }}</a></h2>
+           <p>By {{ blog.author }} on {{ blog.published_date }}</p>
+           <p>{{ blog.content|truncatewords:30 }}</p>
+           {% if user.is_authenticated and blog.author == user.username %}
+               <a href="{% url 'blog_edit' blog.id %}">Edit</a>
+           {% endif %}
+       </div>
+   {% endfor %}
+</section>
+{% endblock %}

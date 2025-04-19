@@ -1,0 +1,19 @@
+<!-- blogs/templates/blog_form.html -->
+{% extends 'base.html' %}
+
+{% block title %}Create/Edit Blog{% endblock %}
+
+{% block content %}
+<section class="blog-form">
+    <h1>{% if form.instance.pk %}Edit Blog{% else %}Create Blog{% endif %}</h1>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        {{ formset.management_form }}
+        {% for form in formset %}
+            {{ form.as_p }}
+        {% endfor %}
+        <button type="submit">{% if form.instance.pk %}Update{% else %}Create{% endif %}</button>
+    </form>
+</section>
+{% endblock %}
